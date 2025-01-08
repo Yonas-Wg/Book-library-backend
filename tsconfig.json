@@ -16,6 +16,8 @@
     "noImplicitAny": false,
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
-    "noFallthroughCasesInSwitch": false
+    "noFallthroughCasesInSwitch": false,
+    "typeRoots": ["node_modules/@types", "./types"],
+    "types": ["node", "babel__core", "babel__generator", "babel__template", "babel__traverse"]
   }
 }
