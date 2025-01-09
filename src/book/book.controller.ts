@@ -6,7 +6,7 @@ import { Book } from '@prisma/client';
 import { ApiTags, ApiOperation, ApiParam } from '@nestjs/swagger';
 import { BadRequestException, NotFoundException } from '@nestjs/common';
 
-@ApiTags('books') // Group all routes under 'books'
+@ApiTags('books')
 @Controller('books')
 export class BookController {
   constructor(private readonly bookService: BookService) {}
@@ -14,11 +14,15 @@ export class BookController {
   @Post()
   @ApiOperation({ summary: 'Create a new book' })
   async create(@Body() createBookDto: CreateBookDto): Promise<Book> {
-    // Validate the DTO
     if (!createBookDto.readStatus || typeof createBookDto.readStatus !== 'boolean') {
       throw new BadRequestException('Invalid read status');
     }
     return this.bookService.create(createBookDto);
+  }
+
+  @Post('manual')
+  async createManual(@Body() createBookDto: CreateBookDto): Promise<Book> {
+    return this.bookService.createManualBook(createBookDto);
   }
 
   @Get()

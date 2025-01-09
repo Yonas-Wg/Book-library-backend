@@ -5,6 +5,12 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
+  app.enableCors({
+    origin: 'http://localhost:3001',
+    methods: 'GET,POST,PATCH,DELETE', 
+    allowedHeaders: 'Content-Type, Authorization', 
+  });
+
   // Configure Swagger options
   const config = new DocumentBuilder()
     .setTitle('Personal Book Library API')
@@ -20,4 +26,5 @@ async function bootstrap() {
   console.log('Application is running on: http://localhost:3000');
   console.log('Swagger API docs available at: http://localhost:3000/api');
 }
+
 bootstrap();
